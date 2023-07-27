@@ -47,12 +47,18 @@ import MainCard from '@/components/MainCard.vue';
         </div>
       </li>
       <li class="advantages__item">
-        <MainCardWithImage
-          heading="ТАМ ЕСТЬ Мост дьявола"
-          :number="2"
-          text="Да, по нему можно пройти! Если вы осмелитесь, конечно"
-          imageName="bridge"
-        />
+        <div class="card__description">
+          <h2 class="card__heading">ТАМ ЕСТЬ Мост дьявола</h2>
+          <p class="card__text">— №2 —</p>
+          <p class="card__text">Да, по нему можно пройти! Если вы осмелитесь, конечно</p>
+        </div>
+        <div class="card__second">
+          <picture>
+            <source media="(min-width: 1200px)" type="image/webp" srcset="../assets/bridge-desktop.webp, ../assets/bridge-desktop.webp 2x">
+            <source type="image/webp" media="(min-width: 768px)" srcset="../assets/bridge-tablet.webp, ../assets/bridge-tablet@2x.webp 2x">
+            <img class="card__image" src="../assets/bridge-mobile.webp" srcset="../assets/bridge-mobile@2x.webp" alt="Мост Дьявола" width="320" height="260">
+          </picture>
+        </div>
       </li>
       <li class="advantages__item">
         <MainCard
@@ -315,6 +321,12 @@ import MainCard from '@/components/MainCard.vue';
     display: grid;
     grid-template-columns: 256px 1fr;
     grid-auto-rows: 256px 1fr;
+  }
+}
+
+.card__second {
+  @include vp-768 {
+    order: -1;
   }
 }
 </style>
