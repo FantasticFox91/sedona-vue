@@ -12,3 +12,5 @@ app.use(createPinia())
 app.use(router)
 
 app.mount('.app')
+
+// "build": "run-p type-check build-only",
