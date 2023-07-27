@@ -17,9 +17,9 @@ const props = defineProps({
   </div>
   <div>
     <picture class="card__image">
-      <source media="(min-width: 1200px)" type="image/webp" :srcset="`../assets/${props.imageName}-desktop.webp, ../assets/${props.imageName}-desktop.webp 2x`">
-      <source media="(min-width: 768px)" type="image/webp" :srcset="`../assets/${props.imageName}-tablet.webp, ../assets/${props.imageName}-tablet@2x.webp 2x`">
-      <img class="card__image" type="image/webp" :src="`../assets/${props.imageName}-mobile.webp`" :srcset="`../assets/${props.imageName}-mobile@2x.webp`" alt="Городок" width="320" height="260">
+      <source media="(min-width: 1200px)" type="image/webp" :srcset="`assets/${props.imageName}-desktop.webp, assets/${props.imageName}-desktop.webp 2x`">
+      <source media="(min-width: 768px)" type="image/webp" :srcset="`assets/${props.imageName}-tablet.webp, assets/${props.imageName}-tablet@2x.webp 2x`">
+      <img class="card__image" type="image/webp" :src="`assets/${props.imageName}-mobile.webp`" :srcset="`assets/${props.imageName}-mobile@2x.webp`" alt="Городок" width="320" height="260">
     </picture>
   </div>
 </template>
