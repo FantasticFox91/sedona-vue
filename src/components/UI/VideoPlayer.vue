@@ -7,7 +7,7 @@
 
   const videoRef = ref(null);
   const isPlaying = ref(false);
-  const videoUrl = 'src/assets/video.mp4';
+  const videoUrl = '/assets/video.mp4';
   const currentTime = ref(0);
   const duration = ref(0);
   const isFullscreen = ref(false);
