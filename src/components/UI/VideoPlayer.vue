@@ -7,6 +7,7 @@
 
   const videoRef = ref(null);
   const isPlaying = ref(false);
+  // Link to video https://www.pexels.com/ru-ru/video/6981411/ by Mikhail Nilov
   const videoUrl = '/assets/free-video.mp4';
   const currentTime = ref(0);
   const duration = ref(0);
