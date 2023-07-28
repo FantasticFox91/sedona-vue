@@ -13,7 +13,7 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: 'src/assets/video.mp4',
+          src: 'src/assets/free-video.mp4',
           dest: 'assets'
         }
       ]
