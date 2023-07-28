@@ -5,7 +5,9 @@
 
   import { ref, onMounted } from 'vue';
 
-  const videoRef = ref(null);
+  type HTMLElementEvent<T extends HTMLElement> = Event & {target: T;};
+
+  const videoRef: {value: HTMLVideoElement | null} = ref(null);
   const isPlaying = ref(false);
   // Link to video https://www.pexels.com/ru-ru/video/6981411/ by Mikhail Nilov
   const videoUrl = '/assets/free-video.mp4';
@@ -14,7 +16,10 @@
   const isFullscreen = ref(false);
 
   const togglePlay = () => {
-    const video = videoRef.value;
+    let video;
+    if (videoRef.value) {
+      video = videoRef.value as HTMLVideoElement;
+    }
     if (video) {
       isPlaying.value ? video.pause() : video.play();
       isPlaying.value = !isPlaying.value;
@@ -22,7 +27,10 @@
   };
 
   const onTimeUpdate = () => {
-      const video = videoRef.value;
+    let video;
+    if (videoRef.value) {
+      video = videoRef.value as HTMLVideoElement;
+    }
       if (video) {
         currentTime.value = video.currentTime;
         duration.value = video.duration;
@@ -39,46 +47,47 @@
   };
 
   const onReset = () => {
-    const video = videoRef.value;
-    video.pause();
-    video.currentTime = 0;
-    video.play();
+    let video;
+    if (videoRef.value) {
+      video = videoRef.value as HTMLVideoElement;
+    }
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+      video.play();
+    }
   }
 
   const onFullScreenClick = () => {
-    const video = videoRef.value;
-      if (video) {
-        if (!isFullscreen.value) {
-          if (video.requestFullscreen) {
-            video.requestFullscreen();
-          } else if (video.mozRequestFullScreen) {
-            video.mozRequestFullScreen();
-          } else if (video.webkitRequestFullscreen) {
-            video.webkitRequestFullscreen();
-          } else if (video.msRequestFullscreen) {
-            video.msRequestFullscreen();
-          }
-        } else {
-          if (document.exitFullscreen) {
-            document.exitFullscreen();
-          } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-          } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-          } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-          }
+    let video;
+    if (videoRef.value) {
+      video = videoRef.value as HTMLVideoElement;
+    }
+    if (video) {
+      if (!isFullscreen.value) {
+        if (video.requestFullscreen) {
+          video.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
         }
+      }
         isFullscreen.value = !isFullscreen.value;
       }
+    }
   }
 
-  const onRangeChange = (e) => {
-    videoRef.value.currentTime = e.target.value;
+  const onRangeChange = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    if (videoRef.value) {
+      videoRef.value.currentTime = Number(target.value);
+    }
   }
 
   const onRangeClick = () => {
-    videoRef.value.pause();
+    if (videoRef.value) {
+      videoRef.value.pause();
+    }
   }
 
   onMounted(() => {

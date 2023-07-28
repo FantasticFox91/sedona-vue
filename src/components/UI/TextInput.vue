@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-ignore: Unreachable code error
 import { IMaskComponent } from 'vue-imask';
 import { useField } from 'vee-validate';
 

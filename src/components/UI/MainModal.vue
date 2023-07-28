@@ -3,11 +3,12 @@ import { onUpdated, ref } from 'vue';
 
 const emits = defineEmits(['update:modelValue'])
 const props = defineProps(['modelValue']);
-const modalRef = ref(null);
+const modalRef: {value: HTMLDivElement | null} = ref(null);
 const modalContainerRef = ref(null);
 
-const onOverlayClick = (e) => {
-  if (!e.target.closest('.modal__container')) {
+const onOverlayClick = (e: Event) => {
+  const target = e.target as HTMLDivElement
+  if (!target.closest('.modal__container')) {
     document.body.classList.remove('scroll-lock');
     emits('update:modelValue', false);
   }
@@ -16,7 +17,9 @@ const onOverlayClick = (e) => {
 onUpdated(() => {
   if (props.modelValue) {
     document.body.classList.add('scroll-lock');
-    modalRef.value.style.top = `${window.scrollY}px`;
+    if (modalRef.value) {
+      modalRef.value.style.top = `${window.scrollY}px`;
+    }
   }
 })
 </script>

@@ -2,7 +2,19 @@
 import * as Yup from 'yup';
 import TextInput from '@/components/UI/TextInput.vue';
 import { Field, Form } from 'vee-validate';
+import type { SubmissionHandler } from 'vee-validate';
 import { useReviewStore } from '@/stores/review';
+
+type userData = {
+  name: string,
+  secondName: string,
+  patronym: string,
+  phoneNumber: string,
+  email: string,
+  review: string,
+  landmarks: string[],
+  comment: string
+}
 
 const useReview = useReviewStore();
 
@@ -14,16 +26,16 @@ const schema = Yup.object({
   email: Yup.string().email().required(),
 })
 
-const onSumbit = (values) => {
-  useReview.sendReview(values);
+const onSubmit: SubmissionHandler = (values) => {
+  const value = values as userData;
+  useReview.sendReview(value);
 }
 
 </script>
 
 <template>
   <section class="review">
-    <!-- <Form class="review__form" @submit="onSumbit" :validation-schema="schema" v-slot="{ values, errorBag }" :initialValues="{review: 'positive'}"> -->
-    <Form class="review__form" @submit="onSumbit" v-slot="{ values, errorBag }">
+    <Form class="review__form" @submit="onSubmit" :validation-schema="schema" v-slot="{ errorBag }" :initialValues="{review: 'positive'}">
       <fieldset class="form__fieldset form__fieldset--personal">
         <h2 class="form__heading">Представьтесь:</h2>
         <div class="form__field">
